@@ -21,6 +21,7 @@
     "@vitejs/plugin-vue-jsx": "^2.0.0",
     "eslint": "^8.23.0",
     "less": "^4.1.3",
+    "postcss-theme-rc": "^1.0.4",
     "prettier": "^2.7.1",
     "typescript": "^4.6.4",
     "vite": "^3.0.7",
