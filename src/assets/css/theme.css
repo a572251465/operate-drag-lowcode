@@ -1,0 +1,15 @@
+.bk {
+    background: rc(bk);
+}
+
+.headBk {
+    background: rc(headBk);
+}
+
+.fc {
+    background: rc(fc);
+}
+
+.panelBk {
+    background: rc(panelBk);
+}

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-
+import Header from "components/Header/index.vue";
 </script>
 
 <template>
-  111211111
+  <Header />
 </template>
