@@ -41,7 +41,7 @@ export const useDragStore = defineStore("dragStore", {
      * @param id 主键id
      * @param panelInfo 表示panel 信息
      */
-    editPanel(id: string, panelInfo: IPanelField) {
+    editPanel(id: string, panelInfo: Partial<IPanelField>) {
       const index = this.panels.findIndex((item) => item.id === id);
       if (!~index) return;
 
