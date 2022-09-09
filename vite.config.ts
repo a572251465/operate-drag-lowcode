@@ -51,6 +51,6 @@ export default defineConfig({
     alias: {
       ...resolveAssignDir(resolvePath("src"))
     },
-    extensions: [".vue", ".ts", ".tsx", ".js"]
+    extensions: [".vue", ".ts", ".d.ts", ".tsx", ".js"]
   }
 });

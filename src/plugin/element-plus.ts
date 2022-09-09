@@ -1,8 +1,8 @@
 import type { App } from "vue";
-import { ElSwitch } from "element-plus";
+import {ElSwitch, ElTooltip} from "element-plus";
 import "element-plus/dist/index.css"
 
-const components = [ElSwitch];
+const components = [ElSwitch, ElTooltip];
 
 const elementPlus = (app: App): App => {
   components.forEach(component => {

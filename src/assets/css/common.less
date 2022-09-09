@@ -1,5 +1,5 @@
 // 表示header 高度
-@headH: 50px;
+@headH: 40px;
 // 表示左侧导航宽度
 @navW: 70px;
 
@@ -12,9 +12,22 @@
   .flex-fn(space-between, center);
 }
 
+.flex-direction-row {
+  .flex-direction-fn(row);
+}
+
+.flex-direction-column {
+  .flex-direction-fn();
+}
+
 /* 共同方法 */
 .flex-fn(@justify: center; @align: center;) {
   display: flex;
   justify-content: @justify;
   align-items: @align;
+}
+
+.flex-direction-fn(@direction: column) {
+  display: flex;
+  flex-direction: @direction;
 }

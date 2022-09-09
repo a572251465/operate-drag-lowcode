@@ -10,6 +10,10 @@
     background: rc(fc);
 }
 
-.panelBk {
-    background: rc(panelBk);
+.oneNavBk {
+    background: rc(oneNavBk);
+}
+
+.twoNavBk {
+    background: rc(twoNavBk);
 }
