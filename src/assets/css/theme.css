@@ -7,13 +7,9 @@
 }
 
 .fc {
-    background: rc(fc);
+    color: rc(fc);
 }
 
-.oneNavBk {
-    background: rc(oneNavBk);
-}
-
-.twoNavBk {
-    background: rc(twoNavBk);
+.navBk {
+    background: rc(navBk);
 }

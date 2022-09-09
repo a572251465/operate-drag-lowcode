@@ -1,48 +1,53 @@
 <script lang="ts" setup>
-import { sourceData, IFunctionType } from "./source-data";
 import { reactive } from "vue";
+import { IBasicsInfo } from "@/views/Chart/components/Left/basics-data";
+import baseData from "./basics-data";
 
-// 表示功能列表
-const fnList = reactive<IFunctionType[]>(sourceData);
+// 表示基本的组件数据
+const dataList = reactive<IBasicsInfo[]>(baseData);
 </script>
 
 <template>
-  <div class="chart-left full-height flex-direction-row">
-    <ul class="oneNav oneNavBk full-height">
-      <li v-for="item of fnList" :key="item.icon" class="flex-center">
+  <div class="chart-left full-height">
+    <ul class="oneNav navBk full-height">
+      <li class="flex-center">
+        <el-tooltip content="容器组件" placement="top">
+          <i class="iconfont fc icon-rongqifuwu" />
+        </el-tooltip>
+      </li>
+      <li v-for="item of dataList" :key="item.icon" class="flex-center">
         <el-tooltip :content="item.title" placement="top">
-          <i class="iconfont pointer" :class="item.icon" />
+          <i class="iconfont fc" :class="item.icon" />
         </el-tooltip>
       </li>
     </ul>
-    <div class="twoNav twoNavBk full-height"></div>
   </div>
 </template>
 
 <style lang="less" scoped>
 @import "@/assets/css/common.less";
 .oneNav {
-  width: 60px;
+  width: 70px;
+  .flex-fn(flex-start, center);
+  .flex-direction-fn();
 
-  li:first-child {
-    margin-top: 20px;
-  }
+  & > li {
+    height: 50px;
+    width: 50px;
+    border: 1px solid transparent;
+    cursor: move;
 
-  li {
-    height: 60px;
+    &:hover {
+      border: 1px dashed #00c773;
+    }
 
-    i {
-      color: #fff;
-      font-size: 25px;
+    &:first-child {
+      margin: 30px 0;
+    }
 
-      &:hover {
-        color: #409eff;
-      }
+    & > i {
+      font-size: 22px;
     }
   }
-}
-
-.twoNav {
-  width: 100px;
 }
 </style>

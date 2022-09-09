@@ -1,11 +1,8 @@
 // 表示所有组件的类（组件/ 容器）
-export enum IComponentClassify {
+export enum IBasisComponent {
   BLOCK_PANEL = "BLOCK_PANEL",
   URL_COMPONENT = "URL_COMPONENT",
-  TABLE_COMPONENT = "TABLE_COMPONENT"
-}
-
-export enum IContainerClassify {
-  CONTAINER = "CONTAINER",
-  COMPONENT = "COMPONENT"
+  TABLE_COMPONENT = "TABLE_COMPONENT",
+  TEXT_COMPONENT = "TEXT_COMPONENT",
+  CENSUS_COMPONENT = "CENSUS_COMPONENT"
 }

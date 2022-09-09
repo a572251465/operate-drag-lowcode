@@ -17,9 +17,7 @@ export default {
     // 字体颜色 font-color
     fc: ["c1", "c3"],
     // 图表一级导航背景颜色
-    oneNavBk: ["c1", "c4"],
-    // 图表二级导航背景颜色
-    twoNavBk: ["c1", "c5"]
+    navBk: ["c1", "c5"]
   },
   themeSelector: ["light", "dark"]
 } as IThemeRcOption;
