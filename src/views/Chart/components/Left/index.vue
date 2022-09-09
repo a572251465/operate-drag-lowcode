@@ -2,15 +2,23 @@
 import { reactive } from "vue";
 import { IBasicsInfo } from "@/views/Chart/components/Left/basics-data";
 import baseData from "./basics-data";
+import { useEditorDrag } from "@/hook/useEditDrag";
+import { IBasisComponent } from "@/types";
 
 // 表示基本的组件数据
 const dataList = reactive<IBasicsInfo[]>(baseData);
+const { dragEnd, dragStart } = useEditorDrag();
 </script>
 
 <template>
   <div class="chart-left full-height">
     <ul class="oneNav navBk full-height">
-      <li class="flex-center">
+      <li
+        class="flex-center"
+        draggable
+        :ondragend="dragEnd"
+        :ondragstart="(e) => dragStart(e, IBasisComponent.PANEL_COMPONENT)"
+      >
         <el-tooltip content="容器组件" placement="top">
           <i class="iconfont fc icon-rongqifuwu" />
         </el-tooltip>

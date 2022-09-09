@@ -1,12 +1,15 @@
 <script lang="ts" setup>
 import Left from "@/views/Chart/components/Left/index.vue";
+import Right from '@/views/Chart/components/Right/index.vue'
 </script>
 
 <template>
   <div class="chart flex-direction-row full-height">
     <Left />
     <div class="flex-1 chart-right flex-direction-column">
-      <div class="chart-right-top"></div>
+      <div class="chart-right-top">
+        <Right />
+      </div>
       <div class="chart-right-bottom">
         <el-tooltip content="预览" placement="top">
           <i class="iconfont icon-yulan pointer fc"></i>
@@ -22,8 +25,7 @@ import Left from "@/views/Chart/components/Left/index.vue";
 .chart-right {
   .chart-right-top {
     flex: 1;
-    background: url("@/assets/images/canvas-bg.svg");
-    margin: 30px 30px 0px 30px;
+    margin: 30px 30px 0 30px;
   }
 
   .chart-right-bottom {
