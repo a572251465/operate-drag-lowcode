@@ -6,3 +6,8 @@ export enum IBasisComponent {
   TEXT_COMPONENT = "TEXT_COMPONENT",
   CENSUS_COMPONENT = "CENSUS_COMPONENT"
 }
+
+export interface INormalFn<T = any, S = void> {
+  (...args: T[]): S;
+  l?: INormalFn
+}
