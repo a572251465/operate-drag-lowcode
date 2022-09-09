@@ -1,8 +1,9 @@
 import { IBasisComponent } from "@/types";
 import { ROOT_CANVAS_CONTAINER, transformDom } from "@/utils";
+import { useDragStore } from "@/store/darg";
 
 export const useEditorDrag = () => {
-  let currentType: IBasisComponent
+  let currentType: IBasisComponent;
 
   // 进去元素 添加一个移动的标识
   const dragEnter = (e: DragEvent) => {
@@ -19,7 +20,11 @@ export const useEditorDrag = () => {
 
   // 松手时 根据拖拽的组件 添加一个组件
   const drop = (e: DragEvent) => {
-
+    // 判断是否是panel
+    if (currentType === IBasisComponent.PANEL_COMPONENT) {
+      const useDrag = useDragStore();
+      useDrag.addPanel(e.offsetX, e.offsetY);
+    }
   };
 
   /**

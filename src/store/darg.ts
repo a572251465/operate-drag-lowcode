@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { IBasisComponent, IPanelField } from "@/types";
-import { genKey, panelDefaultSize } from "@/utils";
+import { genKey, panelDefaultSize, removeElDom } from "@/utils";
 
 interface IDragStore {
   panels: IPanelField[];
@@ -46,6 +46,23 @@ export const useDragStore = defineStore("dragStore", {
       if (!~index) return;
 
       this.panels[index] = Object.assign({}, this.panels[index], panelInfo);
+    },
+
+    /**
+     * @author lihh
+     * @description 将panel 进行删除
+     * @param id panel id
+     */
+    removePanel(id: string) {
+      const index = this.panels.findIndex((item) => item.id === id);
+      if (!~index) return;
+
+      const panelInfo = this.panels[index];
+      this.panels.splice(index, 1);
+
+      removeElDom(panelInfo.identity);
+      const identity = panelInfo.component?.identity;
+      if (identity) removeElDom(identity);
     }
   }
 });
