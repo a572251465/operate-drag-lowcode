@@ -38,8 +38,8 @@ watch(themeFlag, (value: boolean) => {
 
   .header-left {
     > img {
-      width: 30px;
-      height: 30px;
+      width: 25px;
+      height: 25px;
     }
   }
 }

@@ -1,6 +1,6 @@
 import { IBasisComponent } from "@/types";
 import { ROOT_CANVAS_CONTAINER, transformDom } from "@/utils";
-import { useDragStore } from "@/store/darg";
+import { useDragStore } from "@/store/drag";
 
 export const useEditorDrag = () => {
   let currentType: IBasisComponent;

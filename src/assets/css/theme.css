@@ -1,15 +1,19 @@
 .bk {
-    background: rc(bk);
+  background: rc(bk);
 }
 
 .headBk {
-    background: rc(headBk);
+  background: rc(headBk);
 }
 
 .fc {
-    color: rc(fc);
+  color: rc(fc);
 }
 
 .navBk {
-    background: rc(navBk);
+  background: rc(navBk);
+}
+
+.panelBk {
+  background: rc(panelBk);
 }

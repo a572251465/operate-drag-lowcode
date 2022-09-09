@@ -46,7 +46,7 @@ const { dragEnd, dragStart } = useEditorDrag();
     cursor: move;
 
     &:hover {
-      border: 1px dashed #00c773;
+      border: 1px dashed #0b71e6;
     }
 
     &:first-child {
