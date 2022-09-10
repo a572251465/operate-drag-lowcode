@@ -4,6 +4,7 @@ import { IBasicsInfo } from "@/views/Chart/components/Left/basics-data";
 import baseData from "./basics-data";
 import { useEditorDrag } from "@/hook/useEditDrag";
 import { IBasisComponent } from "@/types";
+import containerSvg from "@/assets/images/container-svg.svg";
 
 // 表示基本的组件数据
 const dataList = reactive<IBasicsInfo[]>(baseData);
@@ -20,12 +21,12 @@ const { dragEnd, dragStart } = useEditorDrag();
         :ondragstart="(e) => dragStart(e, IBasisComponent.PANEL_COMPONENT)"
       >
         <el-tooltip content="容器组件" placement="top">
-          <i class="iconfont fc icon-rongqifuwu" />
+          <img :src="containerSvg" alt="组件" />
         </el-tooltip>
       </li>
       <li v-for="item of dataList" :key="item.icon" class="flex-center">
         <el-tooltip :content="item.title" placement="top">
-          <i class="iconfont fc" :class="item.icon" />
+          <img :src="item.icon" alt="组件" />
         </el-tooltip>
       </li>
     </ul>
@@ -44,6 +45,11 @@ const { dragEnd, dragStart } = useEditorDrag();
     width: 50px;
     border: 1px solid transparent;
     cursor: move;
+
+    img {
+      width: 24px;
+      height: 24px;
+    }
 
     &:hover {
       border: 1px dashed #0b71e6;
