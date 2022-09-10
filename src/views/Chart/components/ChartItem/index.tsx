@@ -12,6 +12,7 @@ import { useEditMove } from "@/hook/useEditMove";
 import { setElDom } from "@/utils";
 import BlockResize from "../BlockResize";
 import { useDragStore } from "@/store/drag";
+import MenuBar from "../MenuBar/index.vue";
 
 export default defineComponent({
   props: {
@@ -31,6 +32,8 @@ export default defineComponent({
     // 表示block ref
     const blockRef = ref<HTMLDivElement>();
     const store = useDragStore();
+    // 表示悬浮flag
+    const outFlag = ref<boolean>(false);
 
     /**
      * @author lihh
@@ -57,12 +60,16 @@ export default defineComponent({
             : "chart-item panelBk"
         }
         ref={blockRef}
+        onMouseover={() => (outFlag.value = true)}
+        onMouseleave={() => (outFlag.value = false)}
         onMousedown={(e) => beforeMouseDown(e, props.panelInfo)}
         style={styles.value}>
         {/* 渲染需要拖拽的点  */}
         {props.panelInfo?.isFocus ? (
           <BlockResize curBlock={props.panelInfo} />
         ) : null}
+        {/* 渲染头部菜单  */}
+        <MenuBar panelInfo={props.panelInfo} showFlag={outFlag.value} />
       </div>
     );
   }
