@@ -11,6 +11,7 @@ export interface IPanelField extends IComponentBasicsTypes {
   height: number;
   left: number;
   top: number;
+  isFocus?: boolean,
   component?: IChartField;
 }
 

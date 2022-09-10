@@ -1,8 +1,10 @@
-import { IPanelField } from "@/types";
+import { INormalFn, IPanelField } from "@/types";
 import { useDragStore } from "@/store/drag";
 
-export const useEditMove = () => {
+export const useEditMove = (callback?: INormalFn) => {
   let currentPanel: IPanelField;
+  // 表示requestAnimationFrame flag
+  let setupFlag = false;
   // 表示当前位置信息
   const currentPosInfo = {
     startX: 0,
@@ -13,6 +15,10 @@ export const useEditMove = () => {
   const store = useDragStore();
 
   const move = (e: MouseEvent) => {
+    // 如果已经在拖拽中不予理会
+    if (setupFlag) return;
+    setupFlag = true;
+
     requestAnimationFrame(() => {
       // 鼠标移动的位置
       const endX = e.clientX;
@@ -26,6 +32,7 @@ export const useEditMove = () => {
         left: diffX + currentPosInfo.left,
         top: diffY + currentPosInfo.top
       });
+      setupFlag = false;
     });
   };
 
@@ -51,6 +58,8 @@ export const useEditMove = () => {
   const mouseUp = () => {
     document.removeEventListener("mousemove", move);
     document.removeEventListener("mouseup", mouseUp);
+
+    if (typeof callback === "function") callback();
   };
 
   return {
