@@ -25,7 +25,7 @@ export default defineComponent({
       left: `${props.panelInfo?.left}px`,
       top: `${props.panelInfo?.top}px`
     }));
-    const { mouseDownHandle, mouseUpHandle } = useEditMove();
+    const { mouseDown } = useEditMove();
     // 表示block ref
     const blockRef = ref<HTMLDivElement>();
 
@@ -38,8 +38,7 @@ export default defineComponent({
       <div
         class="chart-item panelBk"
         ref={blockRef}
-        onMouseup={mouseUpHandle}
-        onMousedown={() => mouseDownHandle(props.panelInfo)}
+        onMousedown={(e) => mouseDown(e, props.panelInfo)}
         style={styles.value}></div>
     );
   }

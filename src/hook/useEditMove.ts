@@ -1,47 +1,59 @@
 import { IPanelField } from "@/types";
-import { getElDom } from "@/utils";
 import { useDragStore } from "@/store/drag";
 
 export const useEditMove = () => {
-  let currEl: HTMLDivElement;
   let currentPanel: IPanelField;
-  const posInfo = {
+  // 表示当前位置信息
+  const currentPosInfo = {
+    startX: 0,
+    startY: 0,
     left: 0,
     top: 0
   };
+  const store = useDragStore();
 
   const move = (e: MouseEvent) => {
     requestAnimationFrame(() => {
-      const endX = e.offsetX;
-      const endY = e.offsetY;
+      // 鼠标移动的位置
+      const endX = e.clientX;
+      const endY = e.clientY;
 
-      const diffX = endX - posInfo.left;
-      const diffY = endY - posInfo.top;
+      // 鼠标当前位置 比 开始位置 差多少
+      const diffX = endX - currentPosInfo.startX;
+      const diffY = endY - currentPosInfo.startY;
 
-      const store = useDragStore();
       store.editPanel(currentPanel.id, {
-        left: diffX + currentPanel.left,
-        top: diffY + currentPanel.top
+        left: diffX + currentPosInfo.left,
+        top: diffY + currentPosInfo.top
       });
     });
   };
 
-  const mouseDownHandle = (panelInfo: IPanelField) => {
-    currEl = getElDom(panelInfo.identity)!;
+  const mouseDown = (e: MouseEvent, panelInfo: IPanelField) => {
+    // 取消默认事件
+    e.preventDefault();
+    e.stopPropagation();
+    const { clientX, clientY } = e;
+    // 记录下 鼠标按下的位置
+    currentPosInfo.startX = e.clientX;
+    currentPosInfo.startY = e.clientY;
+
     currentPanel = panelInfo;
 
-    posInfo.left = panelInfo.left;
-    posInfo.top = panelInfo.top;
+    // 记录下panel block位置
+    currentPosInfo.left = panelInfo.left;
+    currentPosInfo.top = panelInfo.top;
 
-    currEl.addEventListener("mousemove", move);
+    document.addEventListener("mousemove", move);
+    document.addEventListener("mouseup", mouseUp);
   };
 
-  const mouseUpHandle = () => {
-    currEl.removeEventListener("mousemove", move);
+  const mouseUp = () => {
+    document.removeEventListener("mousemove", move);
+    document.removeEventListener("mouseup", mouseUp);
   };
 
   return {
-    mouseDownHandle,
-    mouseUpHandle
+    mouseDown
   };
 };
