@@ -27,9 +27,7 @@ export default defineComponent({
       left: `${props.panelInfo?.left}px`,
       top: `${props.panelInfo?.top}px`
     }));
-    const { mouseDown } = useEditMove(() => {
-      store.editPanel(props.panelInfo!.id, { isFocus: false });
-    });
+    const { mouseDown } = useEditMove();
     // 表示block ref
     const blockRef = ref<HTMLDivElement>();
     const store = useDragStore();
@@ -53,7 +51,11 @@ export default defineComponent({
 
     return () => (
       <div
-        class="chart-item panelBk"
+        class={
+          props.panelInfo?.isFocus
+            ? "chart-item panelBk chart-item-active"
+            : "chart-item panelBk"
+        }
         ref={blockRef}
         onMousedown={(e) => beforeMouseDown(e, props.panelInfo)}
         style={styles.value}>

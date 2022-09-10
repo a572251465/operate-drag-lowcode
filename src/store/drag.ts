@@ -37,6 +37,15 @@ export const useDragStore = defineStore("dragStore", {
 
     /**
      * @author lihh
+     * @description 设置元素的选中状态
+     * @param isFocus 是否选中
+     */
+    settingFocus(isFocus: boolean) {
+      this.panels.forEach((item) => (item.isFocus = isFocus));
+    },
+
+    /**
+     * @author lihh
      * @description 对panel 进行编辑
      * @param id 主键id
      * @param panelInfo 表示panel 信息
@@ -44,6 +53,8 @@ export const useDragStore = defineStore("dragStore", {
     editPanel(id: string, panelInfo: Partial<IPanelField>) {
       const index = this.panels.findIndex((item) => item.id === id);
       if (!~index) return;
+
+      if (panelInfo.isFocus === true) this.settingFocus(false);
 
       this.panels[index] = Object.assign({}, this.panels[index], panelInfo);
     },

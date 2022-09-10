@@ -42,8 +42,8 @@ export const useEditMove = (callback?: INormalFn) => {
     e.stopPropagation();
     const { clientX, clientY } = e;
     // 记录下 鼠标按下的位置
-    currentPosInfo.startX = e.clientX;
-    currentPosInfo.startY = e.clientY;
+    currentPosInfo.startX = clientX;
+    currentPosInfo.startY = clientY;
 
     currentPanel = panelInfo;
 
