@@ -55,7 +55,8 @@ export const useEditorDrag = (callback?: INormalFn) => {
 
       const el = e.target as HTMLDivElement;
       const id = el.dataset.id;
-      console.error(`drag block<type=${currentType}>, current id is empty`);
+      if (id == undefined)
+        console.error(`drag block<type=${currentType}>, current id is empty`);
 
       // 表示拖拽成功的逻辑
       if (typeof callback === "function" && typeof id === "string")

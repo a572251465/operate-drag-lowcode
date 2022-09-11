@@ -1,5 +1,6 @@
 import { INormalFn, IPanelField } from "@/types";
 import { useDragStore } from "@/store/drag";
+import { getElDom, ROOT_CANVAS_CONTAINER } from "@/utils";
 
 export const useEditMove = (callback?: INormalFn) => {
   let currentPanel: IPanelField;
@@ -13,6 +14,8 @@ export const useEditMove = (callback?: INormalFn) => {
     top: 0
   };
   const store = useDragStore();
+  // 表示获取root 元素
+  const elDom = getElDom(ROOT_CANVAS_CONTAINER);
 
   const move = (e: MouseEvent) => {
     // 如果已经在拖拽中不予理会
@@ -28,9 +31,12 @@ export const useEditMove = (callback?: INormalFn) => {
       const diffX = endX - currentPosInfo.startX;
       const diffY = endY - currentPosInfo.startY;
 
+      let left = diffX + currentPosInfo.left;
+      let top = diffY + currentPosInfo.top;
+
       store.editPanel(currentPanel.id, {
-        left: diffX + currentPosInfo.left,
-        top: diffY + currentPosInfo.top
+        left,
+        top
       });
       setupFlag = false;
     });

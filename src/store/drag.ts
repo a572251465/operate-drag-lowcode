@@ -61,6 +61,18 @@ export const useDragStore = defineStore("dragStore", {
 
     /**
      * @author lihh
+     * @description 根据指定的id 获取panel 信息
+     * @param id id
+     */
+    getPanelById(id: string): IPanelField | null {
+      const panel = this.panels.find((item) => item.id === id);
+      if (panel === undefined) return null;
+
+      return panel;
+    },
+
+    /**
+     * @author lihh
      * @description 将panel 进行删除
      * @param id panel id
      */

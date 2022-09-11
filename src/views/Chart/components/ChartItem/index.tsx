@@ -42,9 +42,12 @@ export default defineComponent({
      * @param panelInfo panel 容器信息
      */
     const beforeMouseDown = (e: MouseEvent, panelInfo: IPanelField) => {
-      mouseDown(e, panelInfo);
+      const panel = store.getPanelById(props.panelInfo?.id);
+      if (panel) {
+        mouseDown(e, panelInfo);
 
-      store.editPanel(props.panelInfo!.id, { isFocus: true });
+        store.editPanel(props.panelInfo!.id, { isFocus: !panelInfo.isFocus });
+      }
     };
 
     onMounted(() => {
