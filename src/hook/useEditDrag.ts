@@ -1,5 +1,5 @@
 import { IBasisComponent } from "@/types";
-import { ROOT_CANVAS_CONTAINER, transformDom } from "@/utils";
+import { getAllPanelDom, ROOT_CANVAS_CONTAINER, transformDom } from "@/utils";
 import { useDragStore } from "@/store/drag";
 import { ElMessage } from "element-plus";
 
@@ -30,6 +30,43 @@ export const useEditorDrag = () => {
     ElMessage.error("组件只能放到容器上");
   };
 
+  // 表示拖拽到容器之上
+  const dragContainerUp = {
+    dragEnter: (e: DragEvent) => {
+      e.dataTransfer!.dropEffect = "move";
+
+      const el = e.target as HTMLDivElement;
+      if (el.classList.contains("chart-item")) {
+        el.className = `${el.className} chart-item-over-active`;
+      }
+    },
+    dragOver: (e: DragEvent) => {
+      e.preventDefault();
+    },
+    dragLeave: (e: DragEvent) => {
+      e.dataTransfer!.dropEffect = "none";
+      removeAssignClassName(e);
+    },
+    drop: (e: DragEvent) => {
+      // 取消默认事件
+      e.preventDefault();
+      e.stopPropagation();
+      removeAssignClassName(e);
+    }
+  };
+
+  /**
+   * @author lihh
+   * @description 删除指定的class name
+   * @param e dom元素
+   */
+  const removeAssignClassName = (e: DragEvent) => {
+    const el = e.target as HTMLDivElement;
+    if (!el.classList.contains("chart-item-over-active")) return;
+
+    el.className = el.className.replace(" chart-item-over-active", "");
+  };
+
   /**
    * @author lihh
    * @description 拖拽开始方法
@@ -37,14 +74,25 @@ export const useEditorDrag = () => {
    * @param type 拖拽的类型
    */
   const dragStart = (e: MouseEvent, type: IBasisComponent) => {
-    const editorRef = transformDom(ROOT_CANVAS_CONTAINER);
     currentType = type;
 
-    // 添加事件
-    editorRef.addEventListener("dragenter", dragEnter);
-    editorRef.addEventListener("dragover", dragOver);
-    editorRef.addEventListener("dragleave", dragLeave);
-    editorRef.addEventListener("drop", drop);
+    // 如果是panel 以及其余容器 绑定事件不同
+    if (currentType === IBasisComponent.PANEL_COMPONENT) {
+      const editorRef = transformDom(ROOT_CANVAS_CONTAINER);
+      // 添加事件
+      editorRef.addEventListener("dragenter", dragEnter);
+      editorRef.addEventListener("dragover", dragOver);
+      editorRef.addEventListener("dragleave", dragLeave);
+      editorRef.addEventListener("drop", drop);
+    } else {
+      const allPanelDom = getAllPanelDom();
+      allPanelDom.forEach((el) => {
+        el!.addEventListener("dragenter", dragContainerUp.dragEnter);
+        el!.addEventListener("dragover", dragContainerUp.dragOver);
+        el!.addEventListener("dragleave", dragContainerUp.dragLeave);
+        el!.addEventListener("drop", dragContainerUp.drop);
+      });
+    }
   };
 
   /**
@@ -52,12 +100,22 @@ export const useEditorDrag = () => {
    * @description 拖拽结束
    */
   const dragEnd = () => {
-    const editorRef = transformDom(ROOT_CANVAS_CONTAINER);
+    if (currentType === IBasisComponent.PANEL_COMPONENT) {
+      const editorRef = transformDom(ROOT_CANVAS_CONTAINER);
 
-    editorRef.removeEventListener("dragenter", dragEnter);
-    editorRef.removeEventListener("dragover", dragOver);
-    editorRef.removeEventListener("dragleave", dragLeave);
-    editorRef.removeEventListener("drop", drop);
+      editorRef.removeEventListener("dragenter", dragEnter);
+      editorRef.removeEventListener("dragover", dragOver);
+      editorRef.removeEventListener("dragleave", dragLeave);
+      editorRef.removeEventListener("drop", drop);
+    } else {
+      const allPanelEl = getAllPanelDom();
+      allPanelEl.forEach((el) => {
+        el!.removeEventListener("dragenter", dragContainerUp.dragEnter);
+        el!.removeEventListener("dragover", dragContainerUp.dragOver);
+        el!.removeEventListener("dragleave", dragContainerUp.dragLeave);
+        el!.removeEventListener("drop", dragContainerUp.drop);
+      });
+    }
   };
   return { dragStart, dragEnd };
 };
