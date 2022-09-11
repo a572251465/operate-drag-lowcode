@@ -1,9 +1,9 @@
-import { IBasisComponent } from "@/types";
+import { IBasisComponent, INormalFn } from "@/types";
 import { getAllPanelDom, ROOT_CANVAS_CONTAINER, transformDom } from "@/utils";
 import { useDragStore } from "@/store/drag";
 import { ElMessage } from "element-plus";
 
-export const useEditorDrag = () => {
+export const useEditorDrag = (callback?: INormalFn) => {
   let currentType: IBasisComponent;
 
   // 进去元素 添加一个移动的标识
@@ -52,6 +52,14 @@ export const useEditorDrag = () => {
       e.preventDefault();
       e.stopPropagation();
       removeAssignClassName(e);
+
+      const el = e.target as HTMLDivElement;
+      const id = el.dataset.id;
+      console.error(`drag block<type=${currentType}>, current id is empty`);
+
+      // 表示拖拽成功的逻辑
+      if (typeof callback === "function" && typeof id === "string")
+        callback(currentType, id);
     }
   };
 

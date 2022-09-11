@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import Left from "@/views/Chart/components/Left/index.vue";
-import Right from '@/views/Chart/components/Right/index.vue'
+import Right from "@/views/Chart/components/Right/index.vue";
+import EditChart from "@/components/EditChart/index.vue";
 </script>
 
 <template>
@@ -17,6 +18,9 @@ import Right from '@/views/Chart/components/Right/index.vue'
       </div>
     </div>
   </div>
+
+  <!-- 编辑图表 -->
+  <EditChart />
 </template>
 
 <style lang="less" scoped>

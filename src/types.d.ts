@@ -11,8 +11,8 @@ export interface IPanelField extends IComponentBasicsTypes {
   height: number;
   left: number;
   top: number;
-  isFocus?: boolean,
-  alignCenter?: boolean,
+  isFocus?: boolean;
+  alignCenter?: boolean;
   component?: IChartField;
 }
 
@@ -28,4 +28,9 @@ export enum IBasisComponent {
 export interface INormalFn<T = any, S = void> {
   (...args: T[]): S;
   l?: INormalFn;
+}
+
+export enum IOperationMenu {
+  // 表示打开编辑图表的弹框
+  OPEN_EDIT_CHART = "OPEN_EDIT_CHART"
 }

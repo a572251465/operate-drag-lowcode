@@ -3,12 +3,20 @@ import { reactive } from "vue";
 import { IBasicsInfo } from "@/views/Chart/components/Left/basics-data";
 import baseData from "./basics-data";
 import { useEditorDrag } from "@/hook/useEditDrag";
-import { IBasisComponent } from "@/types";
+import { IBasisComponent, IOperationMenu } from "@/types";
 import containerSvg from "@/assets/images/container-svg.svg";
+import { emitter, setSelectionPanel } from "@/utils";
 
 // 表示基本的组件数据
 const dataList = reactive<IBasicsInfo[]>(baseData);
-const { dragEnd, dragStart } = useEditorDrag();
+const { dragEnd, dragStart } = useEditorDrag(
+  (type: IBasisComponent, id: string) => {
+    if (type !== IBasisComponent.PANEL_COMPONENT) {
+      setSelectionPanel(id);
+      emitter.emit(IOperationMenu.OPEN_EDIT_CHART, type);
+    }
+  }
+);
 </script>
 
 <template>
