@@ -50,6 +50,13 @@ export default defineComponent({
     onMounted(() => {
       // 给WeakMap 中设置元素
       setElDom(props.panelInfo?.identity, blockRef.value!);
+
+      if (props.panelInfo?.alignCenter === true) return;
+      const { offsetWidth, offsetHeight } = blockRef.value as HTMLDivElement;
+      const left = props.panelInfo.left - offsetWidth / 2;
+      const top = props.panelInfo.top - offsetHeight / 2;
+
+      store.editPanel(props.panelInfo.id, { left, top, alignCenter: true });
     });
 
     return () => (
@@ -59,6 +66,7 @@ export default defineComponent({
             ? "chart-item panelBk chart-item-active"
             : "chart-item panelBk"
         }
+        data-id={props.panelInfo?.id}
         ref={blockRef}
         onMouseover={() => (outFlag.value = true)}
         onMouseleave={() => (outFlag.value = false)}

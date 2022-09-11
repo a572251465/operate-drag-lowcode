@@ -12,6 +12,7 @@ export interface IPanelField extends IComponentBasicsTypes {
   left: number;
   top: number;
   isFocus?: boolean,
+  alignCenter?: boolean,
   component?: IChartField;
 }
 

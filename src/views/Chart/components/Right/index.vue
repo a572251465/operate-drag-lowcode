@@ -32,5 +32,6 @@ onMounted(() => {
 <style lang="less" scoped>
 .canvas-container {
   background: url("@/assets/images/canvas-bg.svg");
+  position: relative;
 }
 </style>

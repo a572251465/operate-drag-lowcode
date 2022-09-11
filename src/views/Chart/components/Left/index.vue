@@ -24,7 +24,14 @@ const { dragEnd, dragStart } = useEditorDrag();
           <img :src="containerSvg" alt="组件" />
         </el-tooltip>
       </li>
-      <li v-for="item of dataList" :key="item.icon" class="flex-center">
+      <li
+        v-for="item of dataList"
+        :key="item.icon"
+        class="flex-center"
+        draggable
+        :ondragend="dragEnd"
+        :ondragstart="(e) => dragStart(e, item.type)"
+      >
         <el-tooltip :content="item.title" placement="top">
           <img :src="item.icon" alt="组件" />
         </el-tooltip>

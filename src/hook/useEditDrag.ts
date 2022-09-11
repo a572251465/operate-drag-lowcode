@@ -1,6 +1,7 @@
 import { IBasisComponent } from "@/types";
 import { ROOT_CANVAS_CONTAINER, transformDom } from "@/utils";
 import { useDragStore } from "@/store/drag";
+import { ElMessage } from "element-plus";
 
 export const useEditorDrag = () => {
   let currentType: IBasisComponent;
@@ -23,8 +24,10 @@ export const useEditorDrag = () => {
     // 判断是否是panel
     if (currentType === IBasisComponent.PANEL_COMPONENT) {
       const useDrag = useDragStore();
-      useDrag.addPanel(e.offsetX, e.offsetY);
+      useDrag.addPanel(e.x, e.y);
+      return;
     }
+    ElMessage.error("组件只能放到容器上");
   };
 
   /**
