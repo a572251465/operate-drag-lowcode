@@ -24,7 +24,7 @@ export const useEditorDrag = () => {
     // 判断是否是panel
     if (currentType === IBasisComponent.PANEL_COMPONENT) {
       const useDrag = useDragStore();
-      useDrag.addPanel(e.x, e.y);
+      useDrag.addPanel(e.offsetX, e.offsetY);
       return;
     }
     ElMessage.error("组件只能放到容器上");
