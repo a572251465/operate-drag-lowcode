@@ -25,6 +25,18 @@ export enum IBasisComponent {
   CENSUS_COMPONENT = "CENSUS_COMPONENT"
 }
 
+// 表示可以选择的图表分类
+export enum ISelectionChartType {
+  LINE = "LINE",
+  BAR = "BAR",
+  PIE = "PIE",
+  GAUGE = "GAUGE",
+  FUNNEL = "FUNNEL",
+  URL = "URL",
+  TABLE = "TABLE",
+  TEXT = "TEXT"
+}
+
 export interface INormalFn<T = any, S = void> {
   (...args: T[]): S;
   l?: INormalFn;

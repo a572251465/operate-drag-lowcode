@@ -1,10 +1,13 @@
 import { useDragStore } from "@/store/drag";
-import { IPanelField } from "@/types";
+import { IPanelField, ISelectionChartType } from "@/types";
+import { ref } from "vue";
 
 let counter = 1;
 const elMap = new WeakMap<object, HTMLDivElement>();
 // 表示选择的panel id
 let selectionPanelId = "";
+// 表示选择的图表分类
+export const selectionChartType = ref<ISelectionChartType>();
 
 export const genKey = () =>
   `${counter++}_${(Math.random() * 100000) | 0}${+new Date()}`;

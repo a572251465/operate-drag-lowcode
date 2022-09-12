@@ -1,5 +1,10 @@
-import { IBasisComponent, INormalFn } from "@/types";
-import { getAllPanelDom, ROOT_CANVAS_CONTAINER, transformDom } from "@/utils";
+import { IBasisComponent, INormalFn, ISelectionChartType } from "@/types";
+import {
+  getAllPanelDom,
+  ROOT_CANVAS_CONTAINER,
+  selectionChartType,
+  transformDom
+} from "@/utils";
 import { useDragStore } from "@/store/drag";
 import { ElMessage } from "element-plus";
 
@@ -61,6 +66,21 @@ export const useEditorDrag = (callback?: INormalFn) => {
       // 表示拖拽成功的逻辑
       if (typeof callback === "function" && typeof id === "string")
         callback(currentType, id);
+
+      // 设置分类
+      switch (currentType) {
+        case IBasisComponent.TABLE_COMPONENT:
+          selectionChartType.value = ISelectionChartType.TABLE;
+          return;
+        case IBasisComponent.TEXT_COMPONENT:
+          selectionChartType.value = ISelectionChartType.TEXT;
+          return;
+        case IBasisComponent.URL_COMPONENT:
+          selectionChartType.value = ISelectionChartType.URL;
+          return;
+        default:
+          selectionChartType.value = ISelectionChartType.LINE;
+      }
     }
   };
 
