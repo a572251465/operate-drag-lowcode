@@ -1,13 +1,13 @@
 <script lang="ts" setup>
-import Bar from "@/components/ChartTpl/Bar.vue";
-import Funnel from "@/components/ChartTpl/Funnel.vue";
-import Gauge from "@/components/ChartTpl/gauge.vue";
-import Line from "@/components/ChartTpl/Line/index.vue";
-import Pie from "@/components/ChartTpl/Pie.vue";
-import Table from "@/components/ChartTpl/Table.vue";
-import Text from "@/components/ChartTpl/Text.vue";
-import Url from "@/components/ChartTpl/Url.vue";
+import Bar from "@/components/FieldConfigure/Bar";
 import { ISelectionChartType } from "@/types";
+import Funnel from "@/components/FieldConfigure/Funnel";
+import Gauge from "@/components/FieldConfigure/gauge";
+import Line from "@/components/FieldConfigure/Line";
+import Pie from "@/components/FieldConfigure/Pie";
+import Table from "@/components/FieldConfigure/Table";
+import Text from "@/components/FieldConfigure/Text";
+import Url from "@/components/FieldConfigure/Url";
 import { computed } from "vue";
 import { selectionChartType } from "@/utils";
 
@@ -31,20 +31,7 @@ const currentComponent = computed<IComponentType | null>(() =>
 </script>
 
 <template>
-  <div class="chart-draw full-height flex-center">
-    <div class="inner">
-      <component :is="currentComponent" />
-    </div>
+  <div class="setting-field">
+    <component :is="currentComponent" />
   </div>
 </template>
-
-<style lang="less" scoped>
-.chart-draw {
-  flex: 1;
-
-  .inner {
-    height: 678px;
-    width: 100%;
-  }
-}
-</style>
