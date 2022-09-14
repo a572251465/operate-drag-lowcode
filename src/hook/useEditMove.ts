@@ -31,8 +31,8 @@ export const useEditMove = (callback?: INormalFn) => {
       const diffX = endX - currentPosInfo.startX;
       const diffY = endY - currentPosInfo.startY;
 
-      let left = diffX + currentPosInfo.left;
-      let top = diffY + currentPosInfo.top;
+      const left = diffX + currentPosInfo.left;
+      const top = diffY + currentPosInfo.top;
 
       store.editPanel(currentPanel.id, {
         left,

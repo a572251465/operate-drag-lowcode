@@ -18,7 +18,7 @@ export default defineComponent({
   props: {
     panelInfo: {
       type: Object as PropType<IPanelField>,
-      default: {}
+      default: () => ({})
     }
   },
   setup(props) {

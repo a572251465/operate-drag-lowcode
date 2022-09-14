@@ -25,7 +25,7 @@ export default defineComponent({
     const panelId = computed<string>(() => props.curBlock?.id);
     const onmousemove = (e: MouseEvent) => {
       let { clientX, clientY } = e;
-      let {
+      const {
         startX,
         startY,
         startWidth,
