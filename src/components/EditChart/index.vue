@@ -7,7 +7,7 @@ import ChartDraw from "@/components/EditChart/components/ChartDraw/index.vue";
 import TableField from "@/components/EditChart/components/TableField/index.vue";
 
 // 弹框显隐表示
-const showFlag = ref<boolean>(true);
+const showFlag = ref<boolean>(false);
 
 // 监听编辑图表触发
 emitter.on(IOperationMenu.OPEN_EDIT_CHART, function (type: IBasisComponent) {

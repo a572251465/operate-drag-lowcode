@@ -6,7 +6,7 @@ import themeConfig from "./theme.config";
 import path from "path";
 import fs from "fs";
 const PostcssThemeRcPlugin = PostcssThemeRc(themeConfig);
-
+import AutoImport from "unplugin-auto-import/vite";
 
 /**
  * @author lihh
@@ -41,7 +41,15 @@ const resolveAssignDir = (dir: string): Record<string, string> => {
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue(), jsx()],
+  plugins: [
+    vue(),
+    jsx(),
+    // 一次执行 终生使用
+    AutoImport({
+      imports: ["vue", "vue-router", "pinia"],
+      eslintrc: { enabled: true }
+    })
+  ],
   css: {
     postcss: {
       plugins: [PostcssThemeRcPlugin]

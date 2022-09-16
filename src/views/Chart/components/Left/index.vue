@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { reactive } from "vue";
 import { IBasicsInfo } from "@/views/Chart/components/Left/basics-data";
 import baseData from "./basics-data";
 import { useEditorDrag } from "@/hook/useEditDrag";
